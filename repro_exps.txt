@@ -1,0 +1,48 @@
+# repro runs
+
+## clip-rocket 
+
+### CC3M
+bash run.sh run_with_submitit.py --model CL2L_R50_CL2L --wandb --dataset cc3m --wd 0.5 --name CL2L_R50_CLIP-CC3M-drop_0.2-layers_6-text_weak_strong --separate-proj --label-smoothing 0.1 --transformer-layers 6 --text-dropout-prob 0.2 --text-augment --metadata /path/to/cc3m.npy --root /path/to/cc3m --epochs 32 --nodes 4 --batch-size 128 --use_volta32
+--seed 0,50
+
+### CC12M
+bash run.sh run_with_submitit.py --model CL2L_R50_CL2L --wandb --dataset cc12m  --metadata /path/to/cc12m.npy --root /path/to/cc12m --name CL2L_R50_CLIP-CC12M-smooth_0.1-drop_0.05 --separate-proj --text-dropout-prob 0.05 --text-augment --loss-avg-or-sum sum --label-smoothing 0.1 --epochs 32 --nodes 4 --batch-size 128 --use_volta32
+--seed 0,10,50
+
+### YFCC
+bash run.sh run_with_submitit.py --model CL2L_R50_CL2L --wandb --dataset yfcc15m --name CL2L_R50_CLIP-YFCC-smooth_0.1-drop_0.0-rmsw_0.9 --separate-proj --remove-stopwords-prob 0.9 --text-dropout-prob 0.0 --text-augment --clean-before-augment --loss-avg-or-sum sum --label-smoothing 0.1 --epochs 32 --nodes 4 --batch-size 128 --use_volta32
+--seed 0,10,50
+bash run.sh run_with_submitit.py --model CL2L_VITS16MOCO_CL2L --wandb --dataset yfcc15m --name CL2L_VITS16MOCO_CLIP-YFCC-smooth_0.1-drop_0.0 --separate-proj --text-dropout-prob 0.0 --text-augment --clean-before-augment --loss-avg-or-sum sum --label-smoothing 0.1 --epochs 32 --nodes 4 --batch-size 128 --use_volta32 --checkpoint-grad
+--epochs 25,32 --seed 0,10,50
+bash run.sh run_with_submitit.py --model CL2L_VITB16_CL2L --wandb --dataset yfcc15m --name CL2L_VITB16_CLIP-YFCC-smooth_0.1-drop_0.0 --separate-proj --text-dropout-prob 0.0 --text-augment --clean-before-augment --loss-avg-or-sum sum --label-smoothing 0.1 --epochs 32 --nodes 4 --batch-size 128 --use_volta32 --checkpoint-grad
+--epochs 25,32
+
+### 29M
+bash run.sh run_with_submitit.py --model CL2L_R50_CL2L --wandb --dataset merged_opendata --name CL2L_R50_CLIP-MERGED-smooth_0.1-drop_0.0-lr_0.002-mc_192 --caption-sampling multi --lr 2e-3 --multicrop-resize 192 --separate-proj --text-dropout-prob 0.0 --text-augment --clean-before-augment --loss-avg-or-sum sum --label-smoothing 0.1 --epochs 32 --nodes 4 --batch-size 128 --use_volta32 --metadata /path/to/cc3m.npy---/path/to/cc12m.npy---/path/to/yfcc15m.pkl --root /path/to/cc3m---/path/to/cc12m---/path/to/yfcc100m
+
+## [non-contrastive]lip-rocket
+
+### YFCC
+bash run.sh run_with_submitit.py --model CL2L_R50_BARLIP --wandb --dataset yfcc15m --name CL2L_R50_BARLIP-YFCC-smooth_0.1-drop_0.0 --separate-proj --text-dropout-prob 0.0 --text-augment --clean-before-augment --loss-avg-or-sum sum --label-smoothing 0.1 --epochs 32 --nodes 4 --batch-size 128 --use_volta32 --checkpoint-grad
+bash run.sh run_with_submitit.py --model CL2L_R50_SIAMLIP --wandb --dataset yfcc15m --name CL2L_R50_BYOLIP-YFCC-smooth_0.1-drop_0.0 --momentum --separate-proj --text-dropout-prob 0.0 --text-augment --clean-before-augment --loss-avg-or-sum sum --label-smoothing 0.1 --epochs 32 --nodes 4 --batch-size 128 --use_volta32 --checkpoint-grad
+bash run.sh run_with_submitit.py --model CL2L_R50_SIAMLIP --wandb --dataset yfcc15m --name CL2L_R50_SIAMLIP-YFCC-smooth_0.1-drop_0.0 --separate-proj --text-dropout-prob 0.0 --text-augment --clean-before-augment --loss-avg-or-sum sum --label-smoothing 0.1 --epochs 32 --nodes 4 --batch-size 128 --use_volta32 --checkpoint-grad
+bash run.sh run_with_submitit.py --model CL2L_R50_SWALIP --wandb --dataset yfcc15m --name CL2L_R50_SWALIP-YFCC-drop_0.0 --separate-proj --text-dropout-prob 0.0 --text-augment --clean-before-augment --loss-avg-or-sum sum --label-smoothing 0.0 --epochs 32 --nodes 4 --batch-size 128 --use_volta32 --checkpoint-grad
+
+bash run.sh run_with_submitit.py --model CL2L_VITS16MOCO_BARLIP --wandb --dataset yfcc15m --name CL2L_VITS16MOCO_BARLIP-YFCC-smooth_0.1-drop_0.0 --separate-proj --text-dropout-prob 0.0 --text-augment --clean-before-augment --loss-avg-or-sum sum --label-smoothing 0.1 --epochs 32 --nodes 4 --batch-size 128 --use_volta32 --checkpoint-grad --separate-proj-child
+bash run.sh run_with_submitit.py --model CL2L_VITS16MOCO_SIAMLIP --wandb --dataset yfcc15m --name CL2L_VITS16MOCO_BYOLIP-YFCC-smooth_0.1-drop_0.0 --momentum --separate-proj --text-dropout-prob 0.0 --text-augment --clean-before-augment --loss-avg-or-sum sum --label-smoothing 0.1 --epochs 32 --nodes 4 --batch-size 128 --use_volta32 --separate-proj-child
+bash run.sh run_with_submitit.py --model CL2L_VITS16MOCO_SIAMLIP --wandb --dataset yfcc15m --name CL2L_VITS16MOCO_SIAMLIP-YFCC-smooth_0.1-drop_0.0 --separate-proj --text-dropout-prob 0.0 --text-augment --clean-before-augment --loss-avg-or-sum sum --label-smoothing 0.1 --epochs 32 --nodes 4 --batch-size 128 --use_volta32 --separate-proj-child
+bash run.sh run_with_submitit.py --model CL2L_VITS16MOCO_SWALIP --wandb --dataset yfcc15m --name CL2L_VITS16MOCO_SWALIP-YFCC-drop_0.0 --separate-proj --text-dropout-prob 0.0 --text-augment --clean-before-augment --loss-avg-or-sum sum --label-smoothing 0.0 --epochs 32 --nodes 4 --batch-size 128 --use_volta32 --separate-proj-child
+
+### CC3M
+bash run.sh run_with_submitit.py --model CL2L_R50_BARLIP --wandb --dataset cc3m --wd 0.5 --name CL2L_R50_BARLIP-CC3M-drop_0.2-smooth_0.1-layers_6 --separate-proj --label-smoothing 0.1 --transformer-layers 6 --text-dropout-prob 0.2 --text-augment --metadata /path/to/cc3m.npy --root /path/to/cc3m --epochs 32 --nodes 4 --batch-size 128 --use_volta32 --checkpoint-grad
+bash run.sh run_with_submitit.py --model CL2L_R50_SIAMLIP --wandb --dataset cc3m --wd 0.5 --name CL2L_R50_SIAMLIP-CC3M-drop_0.2-smooth_0.1-layers_6 --separate-proj --label-smoothing 0.1 --transformer-layers 6 --text-dropout-prob 0.2 --text-augment --metadata /path/to/cc3m.npy --root /path/to/cc3m --epochs 32 --nodes 4 --batch-size 128 --use_volta32 --checkpoint-grad
+bash run.sh run_with_submitit.py --model CL2L_R50_SIAMLIP --wandb --dataset cc3m --wd 0.5 --name CL2L_R50_BYOLIP-CC3M-drop_0.2-smooth_0.1-layers_6 --momentum --separate-proj --label-smoothing 0.1 --transformer-layers 6 --text-dropout-prob 0.2 --text-augment --metadata /path/to/cc3m.npy --root /path/to/cc3m --epochs 32 --nodes 4 --batch-size 128 --use_volta32 --checkpoint-grad
+bash run.sh run_with_submitit.py --model CL2L_R50_SWALIP --wandb --dataset cc3m --wd 0.5 --name CL2L_R50_SWALIP-CC3M-drop_0.2-layers_6 --separate-proj --label-smoothing 0.0 --transformer-layers 6 --text-dropout-prob 0.2 --text-augment --metadata /path/to/cc3m.npy --root /path/to/cc3m --epochs 32 --nodes 4 --batch-size 128 --use_volta32
+
+
+### CC12M
+bash run.sh run_with_submitit.py --model CL2L_R50_BARLIP --wandb --dataset cc12m  --metadata /path/to/cc12m.npy --root /path/to/cc12m --name CL2L_R50_BARLIP-CC12M-smooth_0.1-drop_0.1 --separate-proj --text-dropout-prob 0.1 --text-augment --loss-avg-or-sum sum --label-smoothing 0.1 --epochs 32 --nodes 4 --batch-size 128 --use_volta32 --checkpoint-grad
+bash run.sh run_with_submitit.py --model CL2L_R50_SIAMLIP --wandb --dataset cc12m  --metadata /path/to/cc12m.npy --root /path/to/cc12m --name CL2L_R50_SIAMLIP-CC12M-smooth_0.1-drop_0.1 --separate-proj --text-dropout-prob 0.1 --text-augment --loss-avg-or-sum sum --label-smoothing 0.1 --epochs 32 --nodes 4 --batch-size 128 --use_volta32 --checkpoint-grad
+bash run.sh run_with_submitit.py --model CL2L_R50_SIAMLIP --wandb --dataset cc12m  --metadata /path/to/cc12m.npy --root /path/to/cc12m --name CL2L_R50_BYOLIP-CC12M-smooth_0.1-drop_0.1 --momentum --separate-proj --text-dropout-prob 0.1 --text-augment --loss-avg-or-sum sum --label-smoothing 0.1 --epochs 32 --nodes 4 --batch-size 128 --use_volta32 --checkpoint-grad
+bash run.sh run_with_submitit.py --model CL2L_R50_SWALIP --wandb --dataset cc12m  --metadata /path/to/cc12m.npy --root /path/to/cc12m --name CL2L_R50_SWALIP-CC12M-drop_0.1 --separate-proj --text-dropout-prob 0.1 --text-augment --loss-avg-or-sum sum --label-smoothing 0.0 --epochs 32 --nodes 4 --batch-size 128 --use_volta32 --checkpoint-grad
