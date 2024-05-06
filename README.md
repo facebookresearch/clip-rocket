@@ -1,7 +1,7 @@
-# [Improved baselines for vision-language pre-training](arxiv-link)
+# [Improved baselines for vision-language pre-training](https://arxiv.org/abs/2305.08675)
 
 ## In this repo:
- - **CLIP** :rocket:, an improved recipe for training [CLIP](https://arxiv.org/abs/2103.00020)
+ - [**CLIP** :rocket:](https://arxiv.org/abs/2305.08675), an improved recipe for training [CLIP](https://arxiv.org/abs/2103.00020)
  - **SiamLIP**, **BYOLIP**, **BarLIP**, and **SwALIP**, non-contrastive VLP baselines extending CLIP and inspired from [SimSiam](https://arxiv.org/abs/2011.10566), [BYOL](https://arxiv.org/abs/2006.07733), [Barlow Twins](https://arxiv.org/abs/2103.03230), and [SwAV](https://arxiv.org/abs/2006.09882)
  - [**repro_exps.txt**](repro_exps.txt): scripts to reproduce the experiments of our paper: [Improved baselines for vision-language pre-training](arxiv-link)
 
@@ -144,10 +144,14 @@ The majority of `clip-rocket` is licensed under CC-BY-NC, however portions of th
 
 ### Citation
 ```
-@article{fini2023improved,
-  title   = {Improved baselines for vision-language pre-training},
-  author  = {Fini, Enrico and Astolfi, Pietro and Romero-Soriano, Adriana and Verbeek, Jakob and Drozdzal, Michal},
-  journal = {arXiv preprint arXiv:2305.08675},
-  year    = {2023}
+@article{
+fini2023improved,
+  title={Improved baselines for vision-language pre-training},
+  author={Enrico Fini and Pietro Astolfi and Adriana Romero-Soriano and Jakob Verbeek and Michal Drozdzal},
+  journal={Transactions on Machine Learning Research},
+  issn={2835-8856},
+  year={2023},
+  url={https://openreview.net/forum?id=a7nvXxNmdV},
+  note={Featured Certification}
 }
 ```
